@@ -9,34 +9,23 @@ class Testclass extends Component {
         }
 
     }
+
     updateColor = () => {
-        this.setState({
-            color : "blue"
-        })
+        this.setState({color: "blue"})
     }
+    
 
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-    }
 
     shouldComponentUpdate(nextProps, nextState) {
-
+        return true
     }
 
     componentWillUpdate(nextProps, nextState) {
-
+        alert("Component will update")
     }
 
     componentDidUpdate(prevProps, prevState) {
-
+        alert("component has updated")
     }
 
     componentWillUnmount() {
@@ -48,7 +37,7 @@ class Testclass extends Component {
             <div>
                 <p>The color of my car is {this.state.color}</p>
                 <p>My count {this.state.count}</p>
-                <button onClick={this.updateColor}>Change</button>
+                <button onClick={this.updateColor}>Change Color</button>
                 <button onClick={(prev) => this.setState({count : prev.count++})}>Increase</button>
 
             </div>

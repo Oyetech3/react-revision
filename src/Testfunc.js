@@ -1,15 +1,15 @@
 import React, {useState} from 'react'
+import Todos from './Todos'
 
-function Testfunc({brand}) {
-    const [color, setColor] = useState("red")
-    const changeColor = () => {
-        setColor("blue")
-    }
+function Testfunc() {
+    const [count, setCount] = useState(0)
+    const [todo, setTodos] = useState(["Todo 1", "Todo 2"])
   return (
     <div>
-        <p>My color is {color}</p>
-        <p>The brand of my car is {brand}</p>
-        <button onClick={changeColor}>Change color</button>
+      <Todos todos={todo} />
+      <hr/>
+      <p>My count {count}</p>
+      <button onClick={() => setCount(c => c + 1)}>Increase Count</button>
     </div>
   )
 }
