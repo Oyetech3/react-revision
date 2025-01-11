@@ -1,15 +1,23 @@
-import React, {useState} from 'react'
-import Todos from './Todos'
+import React, {useEffect,  useState} from 'react'
+import axios from "axios"
+
 
 function Testfunc() {
-    const [count, setCount] = useState(0)
-    const [todo, setTodos] = useState(["Todo 1", "Todo 2"])
+  const [data, setData] = useState(null)
+
+    useEffect(() => {
+      axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then(res => res.data)
+      .then(data => setData(data))
+    },[])
   return (
     <div>
-      <Todos todos={todo} />
-      <hr/>
-      <p>My count {count}</p>
-      <button onClick={() => setCount(c => c + 1)}>Increase Count</button>
+      {
+        data && data.map((data,key) => (
+          <p key={key.id}>{data.title}</p>
+        ))
+      }
     </div>
   )
 }
