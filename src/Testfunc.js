@@ -1,25 +1,31 @@
-import React, {useEffect,  useState} from 'react'
-import axios from "axios"
+import React from 'react'
+import useInput from './useInput'
+
 
 
 function Testfunc() {
-  const [data, setData] = useState(null)
 
-    useEffect(() => {
-      axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then(res => res.data)
-      .then(data => setData(data))
-    },[])
+  const [firstname, bindFirstName, resetFirstName] = useInput('')
+  const [lastname, bindLastName, resetLastName] = useInput('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    alert(`Submitted ${firstname} ${lastname}`)
+    resetFirstName()
+    resetLastName()
+  }
+
   return (
     <div>
-      {
-        data && data.map((data,key) => (
-          <p key={key.id}>{data.title}</p>
-        ))
-      }
+      <form onSubmit={handleSubmit}>
+        Firstname: <input type='text' value={firstname} onChange={bindFirstName} /><br/>
+        Lastname: <input type='text' value={lastname} onChange={bindLastName}/><br/>
+        <input type='submit' value={'Submit'} />
+      </form>
     </div>
   )
 }
+
+
 
 export default Testfunc
