@@ -1,13 +1,16 @@
+import { Provider } from 'react-redux';
 import './App.css';
-import Testfunc from './Testfunc';
+import Testfunc, { store } from './Testfunc';
 
 function App() {
  
   return (
-    <div className="App">
+    <Provider store={store}>
+      <div className="App">
       
-     <Testfunc/>
-    </div>
+      <Testfunc/>
+     </div>
+    </Provider>
   );
 }
 

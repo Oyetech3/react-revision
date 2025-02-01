@@ -1,28 +1,39 @@
 import React from 'react'
-import useInput from './useInput'
+import {createStore} from 'redux'
+import {connect, useDispatch, useSelector} from 'react-redux'
 
+//action
+const buyCake = () => {
+  return {
+    type: "BUY_CAKE"
+  }
+}
+//reducer
+const initialState = {
+  numOfcakes : 10
+}
+const reducer = (state = initialState, action) => {
+  switch(action.type) {
+    case "BUY_CAKE": 
+      return {
+        numOfcakes: state.numOfcakes - 1
+      }
+    default: return state
+  }
+}
 
+export const store = createStore(reducer)
 
 function Testfunc() {
 
-  const [firstname, bindFirstName, resetFirstName] = useInput('')
-  const [lastname, bindLastName, resetLastName] = useInput('')
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert(`Submitted ${firstname} ${lastname}`)
-    resetFirstName()
-    resetLastName()
-  }
+  const numOfCakes = useSelector(state => state.numOfcakes)
+  const dispatch = useDispatch()
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        Firstname: <input type='text' value={firstname} onChange={bindFirstName} /><br/>
-        Lastname: <input type='text' value={lastname} onChange={bindLastName}/><br/>
-        <input type='submit' value={'Submit'} />
-      </form>
-    </div>
+      <div>
+        <p>Number Of Cakes: {numOfCakes}</p>
+        <button onClick={() => dispatch(buyCake())}>Get a cake</button>
+      </div>
   )
 }
 
